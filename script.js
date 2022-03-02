@@ -25,6 +25,8 @@ searchBtn.addEventListener('click', searchTerm)
 // display phones :
 const showPhones = (phones) => {
     // console.log(phones)
+    searchResult.textContent = "";
+    displayDetails.textContent = "";
     phones.forEach(phone => {
         console.log(phone)
         const {phone_name, slug, image} = phone
@@ -32,7 +34,7 @@ const showPhones = (phones) => {
         const phoneElm = document.createElement('div')
         phoneElm.classList.add('col')
         phoneElm.innerHTML = `
-          <div onclick="phoneDetails('${slug}')" class="card h-100">
+          <div  class="card h-100">
             <img src="${image}" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">${phone_name}</h5>
@@ -41,6 +43,9 @@ const showPhones = (phones) => {
                 lead-in to additional content. This content is a little bit
                 longer.
               </p>
+              <button class="btn btn-primary" onclick="phoneDetails('${slug}')">
+            Launch
+          </button>
             </div>
         </div>
         `
@@ -60,16 +65,28 @@ const phoneDetails = phoneId =>{
 
 const displayPhoneDetails = detail =>{
     console.log(detail)
-    const {image, name} = detail
+    displayDetails.textContent = "";
+    const {image, name, releaseDate, mainFeatures, others} = detail
     // phoneDetails
     const detailsElm = document.createElement('div')
     detailsElm.classList.add('card')
     detailsElm.innerHTML = `
-          <img src="${image}" class="card-img-top" alt="...">
-          <div class="card-body">
-          <h5 class="card-title">${name}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
+
+    
+        <img src="${image}" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h4 class="card-title">${name}</h4>
+        <p class="card-text">Release Date: ${releaseDate}</p>
+        <h5 class="card-title">Main Features:</h5>
+        <p class="card-text">Storage: ${mainFeatures.storage}</p>
+        <p class="card-text">Chip Set: ${mainFeatures.chipSet}</p>
+        <p class="card-text">Display Size: ${mainFeatures.displaySize}</p>
+        <h5 class="card-title">Others: </h5>
+        <p class="card-text">NFC: '${others.NFC}'</p>
+        <p class="card-text">Bluetooth: '${others.Bluetooth}'</p>
+        <p class="card-text">USB: '${others.USB}'</p>
+        </div>
+        
     `
     displayDetails.appendChild(detailsElm)
 }
