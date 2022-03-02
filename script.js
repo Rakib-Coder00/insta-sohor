@@ -43,7 +43,6 @@ const showPhones = (phones) => {
     }
     else{
       phones.forEach(phone => {
-        console.log(phone)
         const {phone_name, slug, image} = phone
         const phoneElm = document.createElement('div')
         phoneElm.classList.add('col')
@@ -70,7 +69,6 @@ const showPhones = (phones) => {
 }
 
 const phoneDetails = phoneId =>{
-    console.log(phoneId)
     const detailUrl = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     fetch(detailUrl)
     .then(res => res.json())
@@ -79,8 +77,7 @@ const phoneDetails = phoneId =>{
 
 const displayPhoneDetails = detail =>{
     displayDetails.textContent = "";
-    const {image, name, releaseDate, mainFeatures, others} = detail
-    console.log(others.Bluetooth);
+    const {image, name, releaseDate, mainFeatures, others, sensor} = detail
     const detailsElm = document.createElement('div')
     detailsElm.classList.add('card')
     detailsElm.innerHTML = `
